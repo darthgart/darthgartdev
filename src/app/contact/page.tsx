@@ -7,7 +7,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      <h1>This is Homepage</h1>
+      <h1>Thsi is contact page</h1>
     </main>
   );
 }

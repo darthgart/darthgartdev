@@ -1,49 +1,43 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { MoonIcon, SunIcon, LaptopIcon } from "@radix-ui/react-icons"
-import { useTheme } from "next-themes"
+import * as React from "react";
+import { MoonIcon, SunIcon, LaptopIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button";
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [currentTheme, setCurrentTheme] = React.useState(theme)
+  const { theme, setTheme } = useTheme();
+  const [currentTheme, setCurrentTheme] = React.useState(theme);
 
   React.useEffect(() => {
-    setCurrentTheme(theme)
-  }, [theme])
+    setCurrentTheme(theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     if (currentTheme === "system") {
-      setTheme("light")
+      setTheme("light");
     } else if (currentTheme === "light") {
-      setTheme("dark")
-    } else {
-      setTheme("system")
+      setTheme("dark");
+    } else if (currentTheme === "dark") {
+      setTheme("system");
     }
-  }
+  };
 
   const getIcon = () => {
     if (currentTheme === "dark") {
-      return <SunIcon className="h-[1.2rem] w-[1.2rem] mt-1" />
+      return <MoonIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
     } else if (currentTheme === "light") {
-      return <MoonIcon className="h-[1.2rem] w-[1.2rem] mt-1" />
+      return <SunIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
     } else {
-      return <LaptopIcon className="h-[1.2rem] w-[1.2rem] mt-1" />
+      return <LaptopIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
     }
-  }
+  };
 
   return (
     <Button variant="none" size="icon" onClick={toggleTheme}>
       {getIcon()}
       <span className="sr-only">Toggle theme</span>
     </Button>
-  )
+  );
 }
