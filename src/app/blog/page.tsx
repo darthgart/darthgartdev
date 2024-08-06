@@ -6,8 +6,7 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <Hero />
-      <h1>Thsi is blog page</h1>
+      <h1>This is blog page</h1>
     </main>
   );
 }
