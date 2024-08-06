@@ -11,11 +11,7 @@ export default function Hero() {
         <div className="uppercase font-extrabold text-center mb-4 text-primary text-4xl tracking-[4px] sm:text-8xl sm:tracking-[-12px]">
           SOFTWARE DEVELOPER
         </div>
-        {/* <div className="flex items-center w-full my-5 space-x-4">
-          <div className="flex-grow h-px bg-stone-200"></div>
-        </div> */}
-        {/* <div className="uppercase font-bold text-center mb-4 text-primary text-2xl sm:text-3xl sm:tracking-[30px]">
-          EDGAR SANCHEZ GIMENEZ
+        {/* <div className="container mx-auto">
         </div> */}
       </div>
     </section>
