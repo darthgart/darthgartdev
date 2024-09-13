@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "./ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -10,8 +10,13 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
 
-  const { theme } = useTheme();
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleClick = (e: any, id: any) => {
     e.preventDefault();
@@ -25,13 +30,54 @@ export default function Navbar() {
     }
   };
 
-  const logoSrc = theme === "light" ? "/dglogo-light.svg" : "/dglogo-dark.svg";
+  useEffect(() => {
+    let prevScrollpos = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+
+      if (currentScrollPos > prevScrollpos) {
+        // Scrolling down
+        setScrollingDown(true);
+      } else {
+        // Scrolling up
+        setScrollingDown(false);
+      }
+
+      prevScrollpos = currentScrollPos;
+    };
+    // const handleScroll = () => {
+    //   const currentScrollPos = window.scrollY;
+    //   const navbar = document.getElementById("navbar");
+    //   if (navbar) {
+    //     if (prevScrollpos > currentScrollPos) {
+    //       navbar.style.top = "0";
+    //     } else {
+    //       navbar.style.top = "0";
+    //     }
+    //     prevScrollpos = currentScrollPos;
+    //   }
+    // };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (!mounted) return null;
+
+  const logoSrc =
+    resolvedTheme === "light" ? "/dglogo-light.svg" : "/dglogo-dark.svg";
 
   return (
-    <header className="fixed w-full bg-gradient-to-b from-blur-20 to-transparent backdrop-blur-md z-50">
+    //   className="fixed w-full bg-gradient-to-b from-blur-20 to-transparent backdrop-blur-md z-50"
+    <header id="navbar" className="fixed w-full z-50">
       <div className="sm:container">
         <nav className="flex container mx-auto h-full w-full items-center justify-between p-4 md:p-8">
-          <div className="hidden sm:flex items-center">
+          <div className="hidden sm:flex items-center relative group">
+            {/* Logo */}
             <Link href="/">
               <Image
                 alt="Logo darthgart"
@@ -41,34 +87,51 @@ export default function Navbar() {
                 priority
               />
             </Link>
-            <div className="ml-4 hidden sm:flex flex-col items-left leading-none text-lg">
+            <div className="ml-4 font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
               <span>DARTH</span>
               <span>GART</span>
             </div>
           </div>
           <div className="items-center justify-center justify hidden sm:flex">
-            <Link href="#about">
-              <Button variant="link" className="text-lg">
+            <Link href="/about">
+              <Button
+                variant="link"
+                className="text-lg font-light"
+                data-text="About"
+              >
                 About
               </Button>
             </Link>
-            <Link href="#work">
-              <Button variant="link" className="text-lg">
+            <Link href="/work">
+              <Button
+                variant="link"
+                className="text-lg font-light"
+                data-text="Work"
+              >
                 Work
               </Button>
             </Link>
             <Link href="/blog">
-              <Button variant="link" className="text-lg">
+              <Button
+                variant="link"
+                className="text-lg font-light"
+                data-text="Blog"
+              >
                 Blog
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="link" className="text-lg">
+              <Button
+                variant="link"
+                className="text-lg font-light"
+                data-text="Contact"
+              >
                 Contact
               </Button>
             </Link>
             <ModeToggle />
           </div>
+          {/* Mobile View */}
           <div className="flex sm:hidden items-center justify-between w-full">
             <Link href="/">
               <Image
@@ -76,35 +139,35 @@ export default function Navbar() {
                 src={logoSrc}
                 width={40}
                 height={40}
-                className="mt-5 ml-5"
+                className="mt-5 size-11"
                 priority
               />
             </Link>
             <Sheet>
               <SheetTrigger asChild className="">
                 <Button variant="none" aria-label="Menu">
-                  <HamburgerMenuIcon className="size-8 mt-5 mr-5" />
+                  <HamburgerMenuIcon className="size-9 mt-5 -mr-4" />
                 </Button>
               </SheetTrigger>
               <SheetContent className="space-y-3 flex flex-col items-left grid-cols-1">
                 <ModeToggle />
-                <Link href="#about">
-                  <Button variant="link" className="text-lg mt-14">
+                <Link href="/about">
+                  <Button variant="link" className="text-lg font-light mt-14">
                     About
                   </Button>
                 </Link>
-                <Link href="#work">
-                  <Button variant="link" className="text-lg">
+                <Link href="/work">
+                  <Button variant="link" className="text-lg font-light">
                     Work
                   </Button>
                 </Link>
                 <Link href="/blog">
-                  <Button variant="link" className="text-lg">
+                  <Button variant="link" className="text-lg font-light">
                     Blog
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="link" className="text-lg">
+                  <Button variant="link" className="text-lg font-light">
                     Contact
                   </Button>
                 </Link>

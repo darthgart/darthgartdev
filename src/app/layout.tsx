@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Montserrat } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({
+const workSans = Work_Sans({
+  weight: "variable",
   subsets: ["latin"],
   display: "swap",
-  variable: "--montserrat-font-family",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
-  title: "Darthgart - Software Developer",
-  description: "Description",
+  title: "DARTHGART.DEV",
+  description: "My personal portfolio",
+  authors: [{ name: "Edgar Sánchez" }],
+  keywords: ["desarrollador de software", "proyectos", "portfolio", "estudios"],
+  robots: "index, follow",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -23,14 +32,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={workSans.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <div className="flex-grow">{children}</div>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

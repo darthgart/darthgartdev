@@ -5,6 +5,7 @@ import { MoonIcon, SunIcon, LaptopIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { MoonToSun, SunToMoon } from "./icons";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -15,29 +16,32 @@ export function ModeToggle() {
   }, [theme]);
 
   const toggleTheme = () => {
-    if (currentTheme === "system") {
-      setTheme("light");
-    } else if (currentTheme === "light") {
+    if (currentTheme === "light") {
       setTheme("dark");
-    } else if (currentTheme === "dark") {
-      setTheme("system");
+    } else {
+      setTheme("light");
     }
   };
 
   const getIcon = () => {
     if (currentTheme === "dark") {
-      return <MoonIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
-    } else if (currentTheme === "light") {
-      return <SunIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
+      return (
+        <div>
+          <SunToMoon className="text-xl -mb-2" />
+        </div>
+      );
     } else {
-      return <LaptopIcon className="h-[1.2rem] w-[1.2rem] mt-1" />;
+      return (
+        <div>
+          <MoonToSun className="text-xl -mb-2" />
+        </div>
+      );
     }
   };
 
   return (
     <Button variant="none" size="icon" onClick={toggleTheme}>
       {getIcon()}
-      <span className="sr-only">Toggle theme</span>
     </Button>
   );
 }

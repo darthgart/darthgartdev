@@ -35,11 +35,12 @@
       --radius: 0.5rem;
 
       --underline-color: hsl(var(--foreground));
+      --background-color: hsl(var(--background));
     }
 
     .dark {
-      --background: 20 14.3% 4.1%;
-      --foreground: 21 29% 91%;
+      --background: 20 14% 4%;
+      --foreground: 20 1% 97%;
 
       --card: 20 14.3% 4.1%;
       --card-foreground: 60 9.1% 97.8%;
@@ -68,6 +69,7 @@
       --ring: 24 5.7% 82.9%;
 
       --underline-color: hsl(var(--foreground));
+      --background-color: hsl(var(--background));
     }
   }
 
@@ -78,6 +80,18 @@
     body {
       @apply bg-background text-foreground;
     }
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   .container {
@@ -99,22 +113,50 @@
   .hover-underline-animation {
     display: inline-block;
     position: relative;
+    
   }
   
   .hover-underline-animation::after {
-    content: '';
+    /* content: attr(data-text);
+    color: var(--background-color); */
+    content: "";
+    color: var(--background-color);
     position: absolute;
     width: 100%;
     transform: scaleX(0);
-    height: 2px;
+    height: 1px;
     bottom: 0;
     left: 0;
-    background-color: var(--underline-color);;
+    background-color: var(--underline-color);
     transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    transition: transform 0.25s ease-out, background 0.25s ease-out;
   }
   
   .hover-underline-animation:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+  
+
+  #navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: block;
+    transition: top 0.3s;
+  }
+  
+  #navbar a {
+    float: left;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+
+@media (max-width: 640px) {
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
