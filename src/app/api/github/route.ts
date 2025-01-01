@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json(response.data);
   } catch (error) {
-    console.error('Error fetching repos:', error.message);
     return NextResponse.json({ error: (error as Error).message }, { status: 400 });
   }
 }

@@ -57,8 +57,9 @@ export default function Hero() {
             </div>
             <div className="p-1 text-justify">
               <CardDescription>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Hola, soy desarrollador Full Stack Junior, enfocado en crear
+                experiencias digitales eficientes, funcionales y siempre
+                explorando nuevas tecnologías.
               </CardDescription>
             </div>
           </CardHeader>
@@ -68,7 +69,12 @@ export default function Hero() {
                 darthgart.dev@gmail.com
               </a>
             </Button> */}
-            <Dialog>
+            <Link href="/contact">
+              <Button variant="default" className="w-full mb-5">
+                darthgart.dev@gmail.com
+              </Button>
+            </Link>
+            {/* <Dialog>
               <DialogTrigger asChild>
                 <Button variant="default" className="w-full mb-5">
                   darthgart.dev@gmail.com
@@ -106,7 +112,7 @@ export default function Hero() {
                   <Button type="submit">Enviar</Button>
                 </DialogFooter>
               </DialogContent>
-            </Dialog>
+            </Dialog> */}
             <div className="flex w-full justify-center gap-x-8 sm:gap-x-12">
               <Link href="https://www.github.com/darthgart">
                 <Button variant="none" size="box">

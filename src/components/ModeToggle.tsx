@@ -40,7 +40,12 @@ export function ModeToggle() {
   };
 
   return (
-    <Button variant="none" size="icon" onClick={toggleTheme}>
+    <Button
+      className="mt-1 sm:mt-0"
+      variant="none"
+      size="icon"
+      onClick={toggleTheme}
+    >
       {getIcon()}
     </Button>
   );

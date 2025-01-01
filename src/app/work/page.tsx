@@ -64,7 +64,7 @@ const Work: FC = () => {
     <main className="min-h-screen flex flex-col mt-24 xl:mt-0">
       <section className="flex-grow flex flex-col items-center xl:py-24 xl:pt-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-          <Card className="border-none shadow-none rounded-2xl max-w-80 ">
+          <Card className="border-none shadow-none rounded-2xl max-w-96 sm:max-w-80 ">
             <CardHeader className="relative">
               <div className="space-y-1">
                 <CardTitle>MIS REPOSITORIOS</CardTitle>
@@ -93,28 +93,6 @@ const Work: FC = () => {
             </CardContent>
           </Card>
 
-          {filteredRepos.map((repo) => (
-            <CardRepo
-              html_url={repo.html_url}
-              key={repo.id}
-              name={repo.name}
-              description={repo.description}
-              imageUrl={repo.owner.avatar_url}
-              language={repo.language}
-              updatedAt={repo.updated_at}
-            />
-          ))}
-          {filteredRepos.map((repo) => (
-            <CardRepo
-              html_url={repo.html_url}
-              key={repo.id}
-              name={repo.name}
-              description={repo.description}
-              imageUrl={repo.owner.avatar_url}
-              language={repo.language}
-              updatedAt={repo.updated_at}
-            />
-          ))}
           {filteredRepos.map((repo) => (
             <CardRepo
               html_url={repo.html_url}

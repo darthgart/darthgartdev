@@ -44,7 +44,7 @@ export default function CardRepo({
   const iconColorClasses = getLanguageColorClasses(language);
   return (
     <a href={html_url}>
-      <Card className="hover:border-primary shadow-xl rounded-2xl max-w-80">
+      <Card className="hover:border-primary shadow-xl rounded-2xl max-w-96 sm:max-w-80 mx-5 sm:mx-0">
         <CardHeader className="relative">
           <div className="w-full h-32 rounded-lg overflow-hidden relative">
             <Image

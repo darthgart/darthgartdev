@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useTheme } from "next-themes";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,32 +33,32 @@ export default function Navbar() {
 
   useEffect(() => {
     let prevScrollpos = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-
-      if (currentScrollPos > prevScrollpos) {
-        // Scrolling down
-        setScrollingDown(true);
-      } else {
-        // Scrolling up
-        setScrollingDown(false);
-      }
-
-      prevScrollpos = currentScrollPos;
-    };
     // const handleScroll = () => {
     //   const currentScrollPos = window.scrollY;
-    //   const navbar = document.getElementById("navbar");
-    //   if (navbar) {
-    //     if (prevScrollpos > currentScrollPos) {
-    //       navbar.style.top = "0";
-    //     } else {
-    //       navbar.style.top = "0";
-    //     }
-    //     prevScrollpos = currentScrollPos;
+
+    //   if (currentScrollPos > prevScrollpos) {
+    //     // Scrolling down
+    //     setScrollingDown(true);
+    //   } else {
+    //     // Scrolling up
+    //     setScrollingDown(false);
     //   }
+
+    //   prevScrollpos = currentScrollPos;
     // };
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const navbar = document.getElementById("navbar");
+
+      if (navbar) {
+        if (currentScrollPos > 100 && prevScrollpos < currentScrollPos) {
+          navbar.style.top = "-100px";
+        } else {
+          navbar.style.top = "0";
+        }
+        prevScrollpos = currentScrollPos;
+      }
+    };
 
     window.addEventListener("scroll", handleScroll);
 
@@ -73,8 +74,16 @@ export default function Navbar() {
 
   return (
     //   className="fixed w-full bg-gradient-to-b from-blur-20 to-transparent backdrop-blur-md z-50"
-    <header id="navbar" className="fixed w-full z-50">
-      <div className="sm:container">
+    <header
+      id="navbar"
+      className="fixed w-full bg-background z-50 transition-all duration-300"
+    >
+      <motion.div
+        className="sm:container"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <nav className="flex container mx-auto h-full w-full items-center justify-between p-4 md:p-8">
           <div className="hidden sm:flex items-center relative group">
             {/* Logo */}
@@ -149,7 +158,7 @@ export default function Navbar() {
                   <HamburgerMenuIcon className="size-9 mt-5 -mr-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="space-y-3 flex flex-col items-left grid-cols-1">
+              <SheetContent className="space-y-3 flex flex-col items-left grid-cols-1 ">
                 <ModeToggle />
                 <Link href="/about">
                   <Button variant="link" className="text-lg font-light mt-14">
@@ -175,7 +184,7 @@ export default function Navbar() {
             </Sheet>
           </div>
         </nav>
-      </div>
+      </motion.div>
     </header>
   );
 }
