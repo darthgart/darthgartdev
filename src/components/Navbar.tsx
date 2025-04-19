@@ -8,72 +8,53 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useTheme } from "next-themes";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [scrollingDown, setScrollingDown] = useState(false);
+  const pathname = usePathname()
+  const { resolvedTheme } = useTheme()
+  const [ mounted, setMounted ] = useState(false)
+  const buttons = [
+    { label: "About", href: "/about" },
+    { label: "Work", href: "/work" },
+    // { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
+  ]
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const handleClick = (e: any, id: any) => {
-    e.preventDefault();
-    const target = document.getElementById(id);
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop,
-        behavior: "smooth",
-      });
-      setIsOpen(false);
-    }
-  };
 
   useEffect(() => {
-    let prevScrollpos = window.scrollY;
-    // const handleScroll = () => {
-    //   const currentScrollPos = window.scrollY;
-
-    //   if (currentScrollPos > prevScrollpos) {
-    //     // Scrolling down
-    //     setScrollingDown(true);
-    //   } else {
-    //     // Scrolling up
-    //     setScrollingDown(false);
-    //   }
-
-    //   prevScrollpos = currentScrollPos;
-    // };
+    let prevScrollpos = window.scrollY
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      const navbar = document.getElementById("navbar");
+      const currentScrollPos = window.scrollY
+      const navbar = document.getElementById("navbar")
 
       if (navbar) {
-        if (currentScrollPos > 100 && prevScrollpos < currentScrollPos) {
-          navbar.style.top = "-100px";
+        if (currentScrollPos > 10 && prevScrollpos < currentScrollPos) {
+          navbar.style.top = "-100px"
         } else {
-          navbar.style.top = "0";
+          navbar.style.top = "0"
         }
-        prevScrollpos = currentScrollPos;
+        prevScrollpos = currentScrollPos
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
   const logoSrc =
-    resolvedTheme === "light" ? "/dglogo-light.svg" : "/dglogo-dark.svg";
+    resolvedTheme === "light" ? "/dglogo-light.svg" : "/dglogo-dark.svg"
 
   return (
-    //   className="fixed w-full bg-gradient-to-b from-blur-20 to-transparent backdrop-blur-md z-50"
     <header
       id="navbar"
       className="fixed w-full bg-background z-50 transition-all duration-300"
@@ -84,12 +65,11 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <nav className="flex container mx-auto h-full w-full items-center justify-between p-4 md:p-8">
+        <nav className=" flex container mx-auto h-full w-full items-center justify-between p-4 md:p-8">
           <div className="hidden sm:flex items-center relative group">
-            {/* Logo */}
             <Link href="/">
               <Image
-                alt="Logo darthgart"
+                alt="Logo"
                 src={logoSrc}
                 width={40}
                 height={40}
@@ -101,50 +81,31 @@ export default function Navbar() {
               <span>GART</span>
             </div>
           </div>
-          <div className="items-center justify-center justify hidden sm:flex">
-            <Link href="/about">
-              <Button
-                variant="link"
-                className="text-lg font-light"
-                data-text="About"
-              >
-                About
-              </Button>
-            </Link>
-            <Link href="/work">
-              <Button
-                variant="link"
-                className="text-lg font-light"
-                data-text="Work"
-              >
-                Work
-              </Button>
-            </Link>
-            <Link href="/blog">
-              <Button
-                variant="link"
-                className="text-lg font-light"
-                data-text="Blog"
-              >
-                Blog
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                variant="link"
-                className="text-lg font-light"
-                data-text="Contact"
-              >
-                Contact
-              </Button>
-            </Link>
+          <div className="items-center justify-center gap-2 hidden sm:flex">
+            { buttons.map((button, index) => {
+              const isActive = pathname == button.href
+              return (
+                <Link href={button.href} key={index}>
+                    <Button
+                      variant="link"
+                      className={`text-lg font-light hover-underline-animation ${
+                      isActive ? "active-underline text-primary" : ""
+                    }`}
+                      data-text={button.label}
+                    >
+                      {button.label}
+                    </Button>
+                  </Link>
+              )
+              }
+            )}
             <ModeToggle />
           </div>
           {/* Mobile View */}
           <div className="flex sm:hidden items-center justify-between w-full">
             <Link href="/">
               <Image
-                alt="Logo darthgart"
+                alt="Logo"
                 src={logoSrc}
                 width={40}
                 height={40}
@@ -153,38 +114,25 @@ export default function Navbar() {
               />
             </Link>
             <Sheet>
-              <SheetTrigger asChild className="">
+              <SheetTrigger asChild>
                 <Button variant="none" aria-label="Menu">
-                  <HamburgerMenuIcon className="size-9 mt-5 -mr-4" />
+                  <HamburgerMenuIcon className="size-9 mt-5 -mr-3" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="space-y-3 flex flex-col items-left grid-cols-1 ">
+              <SheetContent className="flex flex-col">
                 <ModeToggle />
-                <Link href="/about">
-                  <Button variant="link" className="text-lg font-light mt-14">
-                    About
-                  </Button>
-                </Link>
-                <Link href="/work">
-                  <Button variant="link" className="text-lg font-light">
-                    Work
-                  </Button>
-                </Link>
-                <Link href="/blog">
-                  <Button variant="link" className="text-lg font-light">
-                    Blog
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="link" className="text-lg font-light">
-                    Contact
-                  </Button>
-                </Link>
+                {buttons.map((button, index) => (
+                   <Link href={button.href} key={index} className="mt-5 p-2 rounded-xl bg-primary text-secondary">
+                   <Button variant="none" className="text-lg font-light">
+                     {button.label}
+                   </Button>
+                 </Link>
+                ))}
               </SheetContent>
             </Sheet>
           </div>
         </nav>
       </motion.div>
     </header>
-  );
+  )
 }

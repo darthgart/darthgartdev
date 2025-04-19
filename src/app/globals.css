@@ -49,7 +49,8 @@
       --popover-foreground: 60 9.1% 97.8%;
 
       /* --primary: 60 9.1% 97.8%; */
-      --primary: 21 29% 91%;
+      /* --primary: 21 29% 91%; */
+      --primary: 0 0% 100%;
       --primary-foreground: 24 9.8% 10%;
 
       --secondary: 12 6.5% 15.1%;
@@ -113,14 +114,10 @@
   .hover-underline-animation {
     display: inline-block;
     position: relative;
-    
   }
   
   .hover-underline-animation::after {
-    /* content: attr(data-text);
-    color: var(--background-color); */
     content: "";
-    color: var(--background-color);
     position: absolute;
     width: 100%;
     transform: scaleX(0);
@@ -132,9 +129,18 @@
     transition: transform 0.25s ease-out, background 0.25s ease-out;
   }
   
-  .hover-underline-animation:hover::after {
+  .hover-underline-animation:hover::after,
+  .active-underline::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+  }
+  
+
+  .bg-map {
+    background-image: url('/map.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;    
   }
   
 

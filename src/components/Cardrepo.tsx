@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import Image from "next/image";
 
 interface CardRepoProps {
   html_url: string;
@@ -37,23 +36,14 @@ export default function CardRepo({
   html_url,
   name,
   description,
-  imageUrl,
   language,
   updatedAt,
 }: CardRepoProps) {
   const iconColorClasses = getLanguageColorClasses(language);
   return (
     <a href={html_url}>
-      <Card className="hover:border-primary shadow-xl rounded-2xl max-w-96 sm:max-w-80 mx-5 sm:mx-0">
+      <Card className="hover:border-primary bg-muted shadow-xl rounded-2xl max-w-96 h-44 sm:max-w-80 mx-5 sm:mx-0">
         <CardHeader className="relative">
-          <div className="w-full h-32 rounded-lg overflow-hidden relative">
-            <Image
-              alt={`Screenshot of ${name}`}
-              src={imageUrl}
-              fill
-              style={{ objectFit: "cover" }}
-            />
-          </div>
           <div className="top-0 left-0 right-0 p-1 space-y-1">
             <CardTitle>{name}</CardTitle>
             <CardDescription>{description}</CardDescription>

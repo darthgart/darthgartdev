@@ -27,13 +27,13 @@ export function ModeToggle() {
     if (currentTheme === "dark") {
       return (
         <div>
-          <SunToMoon className="text-xl -mb-2" />
+          <SunToMoon className="text-3xl sm:text-2xl text-primary -mb-2" />
         </div>
       );
     } else {
       return (
         <div>
-          <MoonToSun className="text-xl -mb-2" />
+          <MoonToSun className="text-3xl sm:text-2xl text-primary -mb-2" />
         </div>
       );
     }
