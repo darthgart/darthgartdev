@@ -1,36 +1,14 @@
-import { CircleIcon } from "@radix-ui/react-icons";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { getLanguageColorClasses, getLanguageHoverShadow } from "@/utils/lenguageColors"
+import { CircleIcon } from "@radix-ui/react-icons"
 
 interface CardRepoProps {
-  html_url: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  language: string;
-  updatedAt: string;
+  html_url: string
+  name: string
+  description: string
+  imageUrl: string
+  language: string
+  updatedAt: string
 }
-
-const getLanguageColorClasses = (language: string | null) => {
-  if (!language) return "fill-gray-400 text-gray-400";
-  switch (language.toLowerCase()) {
-    case "java":
-      return "fill-orange-400 text-orange-400";
-    case "javascript":
-      return "fill-yellow-400 text-yellow-400";
-    case "python":
-      return "fill-green-400 text-green-400";
-    case "typescript":
-      return "fill-sky-400 text-sky-400";
-    default:
-      return "fill-gray-400 text-gray-400";
-  }
-};
 
 export default function CardRepo({
   html_url,
@@ -39,26 +17,28 @@ export default function CardRepo({
   language,
   updatedAt,
 }: CardRepoProps) {
-  const iconColorClasses = getLanguageColorClasses(language);
+  const iconColor = getLanguageColorClasses(language)
+  const hoverShadow = getLanguageHoverShadow(language)
   return (
-    <a href={html_url}>
-      <Card className="hover:border-primary bg-muted shadow-xl rounded-2xl max-w-96 h-44 sm:max-w-80 mx-5 sm:mx-0">
-        <CardHeader className="relative">
-          <div className="top-0 left-0 right-0 p-1 space-y-1">
-            <CardTitle>{name}</CardTitle>
-            <CardDescription>{description}</CardDescription>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="flex space-x-4 text-sm text-muted-foreground">
-            <div className="flex items-center">
-              <CircleIcon className={`mr-1 h-3 w-3 ${iconColorClasses}`} />
-              {language || ""}
-            </div>
-            <div>{new Date(updatedAt).toLocaleDateString()}</div>
-          </div>
-        </CardContent>
-      </Card>
+    <a
+      href={html_url}
+      className={`bg-muted shadow-md rounded-2xl max-w-96 h-44 sm:max-w-80 mx-5 sm:mx-0 
+              transition-all duration-300 ease-in-out
+              hover:scale-[1.02] hover:bg-primary/5
+              hover:shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hover:ring-1 ${hoverShadow}
+                  `}
+    >
+      <div className="p-4 space-y-1">
+        <h3 className="text-lg font-semibold">{name}</h3>
+        <p className="text-muted-foreground text-sm">{description}</p>
+      </div>
+      <div className="px-4 pt-2 flex space-x-4 text-sm text-muted-foreground">
+        <div className="flex items-center">
+          <CircleIcon className={`mr-1 h-3 w-3 ${iconColor}`} />
+          {language || ""}
+        </div>
+        <div>{new Date(updatedAt).toLocaleDateString()}</div>
+      </div>
     </a>
   );
 }
