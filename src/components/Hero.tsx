@@ -19,7 +19,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="absolute -inset-6 rounded-full bg-gradient-to-tr from-pink-500 via-indigo-500 to-sky-500 blur-2xl opacity-50 z-[-1]"
+            className="absolute -inset-6 rounded-full bg-gradient-to-tr from-accent-foreground via-accent to-foreground blur-2xl opacity-50 z-[-1]"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.5 }}
             transition={{ duration: 1, ease: "easeOut" }}

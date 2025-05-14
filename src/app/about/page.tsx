@@ -5,10 +5,27 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Dialog } from "@/components/ui/dialog";
 
 export default function About() {
   const birthDate = new Date(1999, 4, 6);
   const age = calculateAge(birthDate);
+
+  const images = [
+    "/carrusel/rome.jpg",
+    "/carrusel/tuioyop.jpg",
+    "/carrusel/snow.jpg",
+  ];
+
+  const [currentImage, setCurrentImage] = React.useState(0);
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <main className="mt-28 px-6 xl:px-0 max-w-7xl mx-auto text-foreground">
@@ -63,13 +80,79 @@ export default function About() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
       >
-        <h2 className="text-3xl font-semibold text-primary">Pero no todo es desarrollo...</h2>
-        <p className="text-lg text-muted-foreground leading-relaxed mt-6">
-          La tecnología me apasiona, pero también encuentro inspiración en otras áreas. 
-          Practico artes marciales, hago tatuajes y disfruto creando desde diferentes perspectivas. 
-          Además, la música rock y techno forma parte de mi día a día: me acompaña, me inspira y me 
-          activa para afrontar cada reto.
+        <h2 className="text-3xl font-semibold text-primary">Pero no todo es programación...</h2>
+        <p className="text-lg text-muted-foreground leading-relaxed my-6">
+          La tecnología me apasiona, pero mi inspiración va mucho más allá del código.
         </p>
+          <ul className="space-y-2">
+            <li className="flex items-start">
+              <span className="mr-2">🛫</span>
+              <span>
+                Viajar es una de mis grandes motivaciones: descubrir nuevos lugares, conectar con otras culturas y aprender de ellas me enriquece tanto personal como creativamente.
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2">🥋</span>
+              <span>
+                También practico artes marciales, hago tatuajes y disfruto explorando distintos ángulos desde los que crear.
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2">🎧</span>
+              <span>
+                La música, especialmente el rock y el techno, es mi compañera diaria: me impulsa, me inspira y me da energía para encarar cada nuevo desafío.
+              </span>
+            </li>
+          </ul>
+        
+      </motion.section>
+
+      {/* Carrusel de imágenes */}
+      <motion.section
+        className="my-5 px-5 sm:px-10"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+      >
+        <h3 className="text-2xl font-semibold text-primary mb-6">Algunos momentos fuera del código</h3>
+        <div className="relative w-full max-w-3xl mx-auto">
+          <Image
+            src={images[currentImage]}
+            alt={`Foto ${currentImage + 1}`}
+            width={800}
+            height={500}
+            className="rounded-xl object-cover w-full h-auto"
+            priority
+          />
+
+          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 px-4">
+            <button
+              onClick={prevImage}
+              className="bg-background/80 backdrop-blur text-foreground p-2 rounded-full shadow-md hover:bg-background"
+            >
+              ◀
+            </button>
+          </div>
+
+          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 px-4">
+            <button
+              onClick={nextImage}
+              className="bg-background/80 backdrop-blur text-foreground p-2 rounded-full shadow-md hover:bg-background"
+            >
+              ▶
+            </button>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-4">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`w-3 h-3 rounded-full ${index === currentImage ? 'bg-primary' : 'bg-muted-foreground/40'}`}
+              />
+            ))}
+          </div>
+        </div>
       </motion.section>
 
       {/* Estudios + Trabajo */}
@@ -141,12 +224,5 @@ export default function About() {
         </div>
       </motion.section>
     </main>
-  );
+  )
 }
-
-const SkillIcon = ({ icon: Icon, label, color }: any) => (
-  <div className="flex flex-col items-center justify-center">
-    <Icon className={`text-5xl ${color}`} aria-label={label} />
-    <span className="text-sm mt-2">{label}</span>
-  </div>
-);
