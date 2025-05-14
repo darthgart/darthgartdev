@@ -4,6 +4,8 @@ import CardRepo from "@/components/Cardrepo"
 import { FC, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Bin } from "@/components/icons"
+import CardSkeleton from "@/components/CardSkeleton"
+import { motion } from "framer-motion"
 
 interface Repo {
   html_url: string
@@ -17,10 +19,6 @@ interface Repo {
   };
 }
 
-interface WorkPageProps {
-  repos: Repo[]
-}
-
 const fetchRepos = async (): Promise<Repo[]> => {
   try {
     const res = await fetch(`/api/github`)
@@ -31,18 +29,20 @@ const fetchRepos = async (): Promise<Repo[]> => {
     return data
   } catch (error) {
     console.error("Error fetching repos:", error)
-    return [];
+    return []
   }
 };
 
 const Work: FC = () => {
   const [repos, setRepos] = useState<Repo[]>([])
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedRepos = await fetchRepos();
-      setRepos(fetchedRepos);
+      const fetchedRepos = await fetchRepos()
+      setRepos(fetchedRepos)
+      setLoading(false)
     };
     fetchData()
   }, [])
@@ -55,23 +55,30 @@ const Work: FC = () => {
 
   return (
     <main className="min-h-screen flex flex-col mt-24 xl:mt-0">
-      <section className="flex-grow flex flex-col items-center xl:py-24 xl:pt-28">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex-grow flex flex-col items-center xl:py-24 xl:pt-28"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           
           <div className="rounded-2xl max-w-96 sm:max-w-80 border-none shadow-none p-4 space-y-4">
             <div className="space-y-1">
               <h2 className="text-lg font-semibold">DESCUBRE MIS PROYECTOS</h2>
               <p className="text-muted-foreground text-sm">
-                Aquí encontrará smi colección de proyectos, tanto
+                Aquí encontrarás mi colección de proyectos, tanto
                 profesionales como personales.
               </p>
             </div>
 
-            <div className="flex space-x-4 text-sm text-muted-foreground max-w-80">
+            <div className="flex space-x-4 text-sm max-w-80">
               {languages.map((language) => (
                 <Button
                   key={language}
-                  className="py-1 px-3 rounded transition-colors hover:bg-primary/10 hover:text-primary"
+                  className="py-1 px-3 bg-foreground rounded transition-colors 
+                    hover:bg-muted-foreground/20 
+                    hover:text-foreground"
                   onClick={() =>
                     setSelectedLanguage(
                       selectedLanguage === language ? null : language
@@ -84,19 +91,23 @@ const Work: FC = () => {
             </div>
           </div>
 
-          {filteredRepos.map((repo) => (
-            <CardRepo
-              html_url={repo.html_url}
-              key={repo.id}
-              name={repo.name}
-              description={repo.description}
-              imageUrl={repo.owner.avatar_url}
-              language={repo.language}
-              updatedAt={repo.updated_at}
-            />
-          ))}
+          {loading ? (
+            Array.from({ length: 5 }).map((_, i) => <CardSkeleton key={i} />)
+          ) : (
+            filteredRepos.map((repo) => (
+              <CardRepo
+                html_url={repo.html_url}
+                key={repo.id}
+                name={repo.name}
+                description={repo.description}
+                imageUrl={repo.owner.avatar_url}
+                language={repo.language}
+                updatedAt={repo.updated_at}
+              />
+            ))
+          )}
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }

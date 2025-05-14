@@ -40,10 +40,10 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col w-full gap-4 text-center sm:text-start">
-            <h1 className="font-light text-primary text-4xl sm:text-4xl">
+            <h1 className="text-foreground font-light text-4xl sm:text-4xl">
               Edgar Sánchez
             </h1>
-            <p className="text-primary text-3xl sm:text-2xl font-extralight">
+            <p className="text-primary text-3xl sm:text-2xl font-light">
               <Typewriter
                 words={[
                   "Full Stack Developer",

@@ -38,16 +38,19 @@ export default function Contact() {
             </div>
             <Button type="submit">Enviar</Button>
           </div>
+          <div>
+            
+          </div>
         </div>
 
-        {/* <div className="grid justify-between grid-cols-1 mx-5 lg:grid-cols-2 gap-10 p-4 max-w-screen-lg md:mx-10 lg:mx-auto">
+        <div className="grid justify-between grid-cols-1 mx-5 lg:grid-cols-2 gap-10 p-4 max-w-screen-lg md:mx-10 lg:mx-auto">
           <div className="flex flex-col justify-normal items-start space-y-4">
             form
             <div className="font-light italic text-center my-2 text-primary text-md sm:text-md">
             ~ Construye soluciones, no sólo código ~
             </div>
           </div>
-        </div> */}
+        </div>
       </section>
     </main>
   );

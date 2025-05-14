@@ -76,7 +76,7 @@ export default function Navbar() {
                 priority
               />
             </Link>
-            <div className="ml-4 font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
+            <div className="ml-4 text-foreground font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
               <span>DARTH</span>
               <span>GART</span>
             </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
                 <Link href={button.href} key={index}>
                     <Button
                       variant="link"
-                      className={`text-lg font-light hover-underline-animation ${
+                      className={`text-lg text-foreground font-light hover-underline-animation ${
                       isActive ? "active-underline text-primary" : ""
                     }`}
                       data-text={button.label}
@@ -122,8 +122,8 @@ export default function Navbar() {
               <SheetContent className="flex flex-col">
                 <ModeToggle />
                 {buttons.map((button, index) => (
-                   <Link href={button.href} key={index} className="mt-5 p-2 rounded-xl bg-primary text-secondary">
-                   <Button variant="none" className="text-lg font-light">
+                   <Link href={button.href} key={index} className="mt-5 p-2 rounded-xl bg-foreground text-secondary">
+                   <Button variant="none" className="text-lg font-light text-secondary">
                      {button.label}
                    </Button>
                  </Link>

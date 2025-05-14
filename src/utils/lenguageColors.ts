@@ -17,19 +17,19 @@ export function getLanguageColorClasses(language: string | null): string {
   }
   
   export function getLanguageHoverShadow(language: string | null): string {
-    if (!language) return "hover:ring-gray-300"
+    if (!language) return "hover:bg-gray-300/15"
     switch (language.toLowerCase()) {
       case "java":
-        return "hover:ring-red-300"
+        return "hover:bg-red-300/15"
       case "javascript":
-        return "hover:ring-amber-300"
+        return "hover:bg-amber-300/15"
       case "python":
-        return "hover:ring-green-300"
+        return "hover:bg-green-300/15"
       case "typescript":
-        return "hover:ring-sky-300"
+        return "hover:bg-sky-300/15"
       case "astro":
-        return "hover:ring-pink-300"  
+        return "hover:bg-pink-300/15"  
       default:
-        return "hover:ring-gray-300"
+        return "hover:bg-gray-300/15"
     }
   }
