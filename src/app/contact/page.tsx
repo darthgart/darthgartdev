@@ -1,57 +1,108 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@radix-ui/react-label";
-import React from "react";
-import { useForm } from "react-hook-form";
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@radix-ui/react-label"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { motion } from "framer-motion"
 
 export default function Contact() {
-  // const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm()
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+
+  const onSubmit = async (data: any) => {
+    const { name, email, message } = data
+    try {
+      // const response = await fetch("/api/contact", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ name, email, message }),
+      // })
+      
+      // const result = await response.json()
+      if (true) { // Replace with result.success
+        setStatus("success")
+        reset()
+      } else {
+        setStatus("error")
+      }
+    } catch (error) {
+      setStatus("error")
+    }
+  }
   return (
-    <main className="min-h-screen mt-28 sm:mt-24 xl:mt-0">
-      {/* <img src="./map.png" alt="map" width={"90%"} height={800}></img> */}
-      <section className="flex-grow flex flex-col items-center xl:py-24 xl:pt-28">
-        <div className="bg-map grid grid-cols-1 mx-5 lg:grid-cols-2 gap-10 p-4 rounded-xl max-w-screen-xl sm:max-w-screen-lg mt-8 md:mx-10 lg:mx-auto">
-          <div className="grid gap-4 my-4 py-4 p-5 rounded-lg bg-background shadow-xl shadow-black/50">
-            <h2 className="text-2xl font-bold">¿Hablamos?</h2>
-            <p>
-              Puedes rellenar el siguiente formulario, ¡En cuanto lea el mensaje
-              me pondre en contacto contigo!
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-left">
+    <main className="min-h-screen mt-28 sm:mt-32 xl:mt-0">
+      <motion.section
+        className="bg-muted/30 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-border"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="w-full max-w-4xl rounded-xl shadow-xl bg-background/80 backdrop-blur-sm border border-border p-8 sm:p-10">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground mb-4">
+            ¿Hablamos?
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            Puedes rellenar el siguiente formulario. En cuanto lea el mensaje, me pondré en contacto contigo.
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div>
+              <Label htmlFor="name" className="block text-sm font-medium mb-1">
                 Nombre
               </Label>
-              <Input id="name" className="col-span-3 border-primary" />
+              <Input id="name" {...register("name", { required: true })} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-left">
+            <div>
+              <Label htmlFor="email" className="block text-sm font-medium mb-1">
                 Email
               </Label>
-              <Input id="email" className="col-span-3 border-primary" />
+              <Input id="email" type="email" {...register("email", { required: true })} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-4 items-top gap-4">
-              <Label htmlFor="message" className="text-left mt-2">
+            <div>
+              <Label htmlFor="message" className="block text-sm font-medium mb-1">
                 Mensaje
               </Label>
-              <Textarea id="mesage" className="col-span-3 min-h-[100px] border-primary" />
+              <Textarea id="message" className="min-h-[120px]" {...register("message", { required: true })} />
             </div>
-            <Button type="submit">Enviar</Button>
-          </div>
-          <div>
-            
-          </div>
-        </div>
-
-        <div className="grid justify-between grid-cols-1 mx-5 lg:grid-cols-2 gap-10 p-4 max-w-screen-lg md:mx-10 lg:mx-auto">
-          <div className="flex flex-col justify-normal items-start space-y-4">
-            form
-            <div className="font-light italic text-center my-2 text-primary text-md sm:text-md">
-            ~ Construye soluciones, no sólo código ~
+            <div className="flex justify-end">
+              <Button type="submit" className="w-full sm:w-auto">
+                Enviar mensaje
+              </Button>
             </div>
-          </div>
+            {status !== "idle" && (
+              <div
+                className={`relative mt-4 p-4 rounded-lg border ${
+                  status === "success"
+                    ? "bg-green-100 border-green-300 text-green-800"
+                    : "bg-red-100 border-red-300 text-red-800"
+                }`}
+              >
+                <p className="text-sm">
+                  {status === "success"
+                    ? "Mensaje enviado con éxito. ¡Gracias!"
+                    : "Hubo un error al enviar el mensaje."}
+                </p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="absolute top-2 right-2 text-lg leading-none hover:opacity-70"
+                  aria-label="Cerrar alerta"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+          </form>
         </div>
-      </section>
+      </motion.section>
+      <div className="mt-12 text-center">
+        <p className="text-primary italic text-md sm:text-lg">
+          ~ Construye soluciones, no sólo código ~
+        </p>
+      </div>
     </main>
-  );
+  )
 }
