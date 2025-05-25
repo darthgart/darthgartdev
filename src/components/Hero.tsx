@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 
 import { Button } from "./ui/button";
@@ -10,6 +10,30 @@ import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+
+    useEffect(() => {
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "Portfolio",
+        "author": {
+          "@type": "Person",
+          "name": "Edgar Sánchez"
+        },
+        "url": "https://darthgart.dev/work",
+        "description": "Portfolio de Edgar Sánchez, Desarrollador Full Stack en Tarragona."
+      }
+  
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.innerHTML = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+      
+      return () => {
+        document.head.removeChild(script);
+      };
+    }, []);
+
   return (
     <main className="flex flex-col align-center justify-center items-center gap-5 mt-20 sm:mt-0 xl:py-24 xl:px-32">
       <div className="flex flex-col md:flex-row justify-center items-center gap-10 px-10 rounded-xl">

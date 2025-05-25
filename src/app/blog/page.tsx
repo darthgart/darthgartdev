@@ -6,7 +6,7 @@ export const metadata = {
   title: "Blog | DARTHGART.DEV",
   description: "Conoce más sobre Edgar Sanchez, Desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
   alternates: {
-    canonical: "/blog",
+    canonical: "https://darthgart.dev/blog",
   },
   openGraph: {
     title: "Blog | DARTHGART.DEV",

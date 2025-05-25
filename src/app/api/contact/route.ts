@@ -7,7 +7,7 @@ function clientEmailTemplate(name: string) {
   return `
   <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 30px auto; border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: #fff; overflow: hidden;">
     <div style="background-color:rgb(35, 35, 35); padding: 20px; text-align: center;">
-      <img src="https://drive.google.com/file/d/1rbs12Emht5cFgu__yZOLGqE87uRiv73k/view?usp=drive_link" alt="DARTHGART.dev" style="height: 50px; object-fit: contain;" />
+      <img src="https://www.darthgart.dev/dglogo-dark.svg" alt="DARTHGART.dev" style="height: 50px; object-fit: contain;" />
     </div>
     <div style="padding: 30px; color: #333;">
       <h2 style="margin-top: 0; color:rgb(35, 35, 35);">Hola ${name},</h2>
@@ -29,7 +29,7 @@ function adminEmailTemplate(name: string, email: string, message: string) {
   return `
   <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 30px auto; border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: #fff; overflow: hidden;">
     <div style="background-color:rgb(35, 35, 35); padding: 20px; text-align: center;">
-      <img src="https://drive.google.com/file/d/1rbs12Emht5cFgu__yZOLGqE87uRiv73k/view?usp=drive_link" alt="DARTHGART.dev" style="height: 50px; object-fit: contain;" />
+      <img src="https://www.darthgart.dev/dglogo-dark.svg" alt="DARTHGART.dev" style="height: 50px; object-fit: contain;" />
     </div>
     <div style="padding: 30px; color: #333;">
       <h2 style="margin-top: 0; color:rgb(36, 36, 36);">Nuevo mensaje recibido</h2>

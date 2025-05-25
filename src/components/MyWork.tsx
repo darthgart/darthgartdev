@@ -47,6 +47,29 @@ const MyWork: FC = () => {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Mis proyectos",
+      "author": {
+        "@type": "Person",
+        "name": "Edgar Sánchez"
+      },
+      "url": "https://darthgart.dev/work",
+      "description": "Explora los proyectos realizados por Edgar Sánchez, Desarrollador Full Stack en Tarragona."
+    }
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.innerHTML = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+    
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [])
+
   const languages = Array.from(new Set(repos.map((repo) => repo.language)))
 
   const filteredRepos = selectedLanguage

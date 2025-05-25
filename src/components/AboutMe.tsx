@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -25,6 +25,28 @@ export default function AboutMe() {
   // const prevImage = () => {
   //   setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
   // }
+  useEffect(() => {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Sobre mi",
+      "author": {
+        "@type": "Person",
+        "name": "Edgar Sánchez"
+      },
+      "url": "https://darthgart.dev/work",
+      "description": "Conoce más sobre Edgar Sanchez, Desarrollador Full Stack en Tarragona."
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.innerHTML = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+    
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [])
 
   return (
     <main className="mt-28 px-6 xl:px-0 max-w-7xl mx-auto text-foreground flex flex-col align-center justify-center items-center">

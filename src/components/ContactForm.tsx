@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@radix-ui/react-label"
 import { Button } from "@/components/ui/button"
@@ -12,6 +12,29 @@ import { useForm } from "react-hook-form"
 export default function ContactForm() {
   const { register, handleSubmit, reset } = useForm()
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+
+    useEffect(() => {
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "Contacto",
+        "author": {
+          "@type": "Person",
+          "name": "Edgar Sánchez"
+        },
+        "url": "https://darthgart.dev/work",
+        "description": "Formulariod de contacto de Edgar Sánchez, Desarrollador Full Stack en Tarragona."
+      }
+  
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.innerHTML = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+      
+      return () => {
+        document.head.removeChild(script);
+      };
+    }, []);
 
   const onSubmit = async (data: any) => {
     const { name, email, message } = data
