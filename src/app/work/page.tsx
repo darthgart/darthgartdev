@@ -3,6 +3,9 @@ import MyWork from "@/components/MyWork";
 export const metadata = {
   title: "Mis Proyectos | DARTHGART.DEV",
   description: "Explora los proyetos de Edgar Sánchez, Desarrollador Full Stack en Tarragona.",
+  alternates: {
+    canonical: "/work",
+  },
   openGraph: {
     title: "Mis Proyectos | DARTHGART.DEV",
     description: "Explora los proyetos de Edgar Sanchez, Desarrollador Full Stack en Tarragona.",

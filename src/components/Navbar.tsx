@@ -78,10 +78,10 @@ export default function Navbar() {
                 priority
               />
             </Link>
-            <div className="ml-4 text-foreground font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
+            <h1 className="ml-4 text-foreground font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
               <span>DARTH</span>
               <span>GART<b className="text-primary">.dev</b></span>
-            </div>
+            </h1>
           </div>
           <div className="items-center justify-center gap-2 hidden sm:flex">
             { buttons.map((button, index) => {

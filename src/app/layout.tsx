@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 const workSans = Work_Sans({
   weight: "variable",
@@ -18,6 +19,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Edgar Sánchez" }],
   keywords: ["desarrollador de software", "proyectos", "portfolio", "estudios"],
   robots: "index, follow",
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export const viewport = {
@@ -31,7 +35,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es-ES">
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Edgar Sánchez',
+              jobTitle: 'Full Stack Developer',
+              url: 'https://darthgart.dev',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Tarragona',
+                addressCountry: 'ES',
+              },
+              sameAs: [
+                'https://www.github.com/darthgart',
+                'https://www.linkedin.com/in/edgar-sanchez-gimenez-365739234/'
+              ]
+            }),
+          }}
+        />
+      </Head>
       <body className={workSans.className}>
         <ThemeProvider
           attribute="class"

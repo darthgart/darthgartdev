@@ -33,7 +33,6 @@ export default function Hero() {
             height={150}
             priority
             className="rounded-full z-10 relative"
-            loading="lazy"
           />
         </motion.div>
 
@@ -43,9 +42,9 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col w-full gap-4 text-center sm:text-start">
-            <h1 className="text-foreground font-light text-4xl sm:text-4xl">
+            <h2 className="text-foreground font-light text-4xl sm:text-4xl">
               Edgar Sánchez
-            </h1>
+            </h2>
             <h2 className="text-primary text-3xl sm:text-2xl font-light">
               <Typewriter
                 words={[

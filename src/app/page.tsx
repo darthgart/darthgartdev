@@ -2,10 +2,10 @@ import Hero from "@/components/Hero";
 
 export const metadata = {
   title: "DARTHGART.DEV",
-  description: "Explora el portfolio de Edgar Sánchez, Desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
+  description: "Descubre el portfolio de Edgar Sánchez, desarrollador Full Stack en Tarragona. Experto en React, Next.js y Node.js. Creatividad, rendimiento y código limpio en cada proyecto web.",
   openGraph: {
     title: "DARTHGART.DEV",
-    description: "Explora el portfolio de Edgar Sánchez, Desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
+    description: "Descubre el portfolio de Edgar Sánchez, desarrollador Full Stack en Tarragona. Experto en React, Next.js y Node.js. Creatividad, rendimiento y código limpio en cada proyecto web..",
     url: "https://darthgart.dev",
     siteName: "DARTHGART.DEV",
     images: [

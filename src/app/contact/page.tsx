@@ -2,10 +2,13 @@ import ContactForm from "@/components/ContactForm"
 
 export const metadata = {
   title: "Contacto | DARTHGART.DEV",
-  description: "Conoce más sobre Edgar Sanchez, desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
+  description: "Conoce más sobre Edgar Sanchez, Desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contacto | DARTHGART.DEV",
-    description: "Conoce más sobre Edgar Sanchez, desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
+    description: "Conoce más sobre Edgar Sanchez, Desarrollador Full Stack en Tarragona con experiencia en tecnologías como React, Next.js y Node.js.",
     url: "https://darthgart.dev",
     siteName: "DARTHGART.DEV",
     images: [
