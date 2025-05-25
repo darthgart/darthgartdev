@@ -22,7 +22,7 @@ export default function CardRepo({
   return (
     <a
       href={html_url}
-      className={` border-2 shadow-md rounded-2xl max-w-96 h-44 sm:max-w-80 mx-5 sm:mx-0 
+      className={` border-2 shadow-md rounded-2xl h-44 max-w-96 mx-5 sm:mx-0 
               transition-all duration-300 ease-in-out
               hover:scale-[1.02] ${hoverShadow}
               hover:shadow-[0px_4px_12px_rgba(0,0,0,0.1)]  

@@ -1,24 +1,26 @@
-"use client";
-import { Button } from "./ui/button";
-import { ModeToggle } from "@/components/ModeToggle";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { useTheme } from "next-themes";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+
+import { Button } from "./ui/button"
+import { useEffect, useState } from "react"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
+import { ModeToggle } from "@/components/ModeToggle"
+import { useTheme } from "next-themes"
+import { HamburgerMenuIcon } from "@radix-ui/react-icons"
+import { motion } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 export default function Navbar() {
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const [ mounted, setMounted ] = useState(false)
   const buttons = [
-    { label: "About", href: "/about" },
-    { label: "Work", href: "/work" },
+    { label: "Sobre Mi", href: "/about" },
+    { label: "Proyectos", href: "/work" },
     // { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "/contact" },
+    { label: "Contacto", href: "/contact" },
   ]
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function Navbar() {
         }
         prevScrollpos = currentScrollPos
       }
-    };
+    }
 
     window.addEventListener("scroll", handleScroll)
 
@@ -78,7 +80,7 @@ export default function Navbar() {
             </Link>
             <div className="ml-4 text-foreground font-light flex flex-col items-left leading-none text-lg opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300 ease-in-out">
               <span>DARTH</span>
-              <span>GART</span>
+              <span>GART<b className="text-primary">.dev</b></span>
             </div>
           </div>
           <div className="items-center justify-center gap-2 hidden sm:flex">
@@ -122,8 +124,8 @@ export default function Navbar() {
               <SheetContent className="flex flex-col">
                 <ModeToggle />
                 {buttons.map((button, index) => (
-                   <Link href={button.href} key={index} className="mt-5 p-2 rounded-xl bg-foreground text-secondary">
-                   <Button variant="none" className="text-lg font-light text-secondary">
+                   <Link href={button.href} key={index} className="mt-5 p-2 rounded-xl hover:bg-muted transition-colors">
+                   <Button variant="none" className="text-lg font-light">
                      {button.label}
                    </Button>
                  </Link>

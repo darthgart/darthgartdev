@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+
 import { Button } from "./ui/button";
 import { Github, Instagram, Linkedin, Xtwitter } from "./icons";
 import { Typewriter } from "react-simple-typewriter";
@@ -10,7 +11,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section>
+    <main className="flex flex-col align-center justify-center items-center gap-5 mt-20 sm:mt-0 xl:py-24 xl:px-32">
       <div className="flex flex-col md:flex-row justify-center items-center gap-10 px-10 rounded-xl">
         <motion.div
           className="relative w-fit"
@@ -32,6 +33,7 @@ export default function Hero() {
             height={150}
             priority
             className="rounded-full z-10 relative"
+            loading="lazy"
           />
         </motion.div>
 
@@ -44,7 +46,7 @@ export default function Hero() {
             <h1 className="text-foreground font-light text-4xl sm:text-4xl">
               Edgar Sánchez
             </h1>
-            <p className="text-primary text-3xl sm:text-2xl font-light">
+            <h2 className="text-primary text-3xl sm:text-2xl font-light">
               <Typewriter
                 words={[
                   "Full Stack Developer",
@@ -59,7 +61,7 @@ export default function Hero() {
                 deleteSpeed={50}
                 delaySpeed={1500}
               />
-            </p>
+            </h2>
           </div>
         </motion.div>
       </div>
@@ -90,6 +92,6 @@ export default function Hero() {
           </Button>
         </Link>
       </motion.div>
-    </section>
-  );
+    </main>
+  )
 }
