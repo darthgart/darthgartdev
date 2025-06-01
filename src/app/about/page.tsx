@@ -9,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: "Sobre mi | DARTHGART.DEV",
     description: "Conoce más sobre Edgar Sanchez, Desarrollador Full Stack en Tarragona.",
-    url: "https://darthgart.dev",
+    url: "https://darthgart.dev/about",
     siteName: "DARTHGART.DEV",
     images: [
       {

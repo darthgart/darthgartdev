@@ -1,17 +1,16 @@
-import type { Metadata } from "next";
-import { Work_Sans } from "next/font/google";
-import { ThemeProvider } from "@/components/ui/theme-provider";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Head from "next/head";
+import type { Metadata } from "next"
+import { Work_Sans } from "next/font/google"
+import { ThemeProvider } from "@/components/ui/theme-provider"
+import "./globals.css"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 const workSans = Work_Sans({
   weight: "variable",
   subsets: ["latin"],
   display: "swap",
   style: "normal",
-});
+})
 
 export const metadata: Metadata = {
   title: "DARTHGART.DEV",
@@ -22,43 +21,43 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-};
+}
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="es-ES">
-      <Head>
+      <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Edgar Sánchez',
-              jobTitle: 'Full Stack Developer',
-              url: 'https://darthgart.dev',
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Edgar Sánchez",
+              jobTitle: "Full Stack Developer",
+              url: "https://darthgart.dev",
               address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Tarragona',
-                addressCountry: 'ES',
+                "@type": "PostalAddress",
+                addressLocality: "Tarragona",
+                addressCountry: "ES",
               },
               sameAs: [
-                'https://www.github.com/darthgart',
-                'https://www.linkedin.com/in/edgar-sanchez-gimenez-365739234/'
-              ]
+                "https://www.github.com/darthgart",
+                "https://www.linkedin.com/in/edgar-sanchez-gimenez-365739234/",
+              ],
             }),
           }}
         />
-      </Head>
+      </head>
       <body className={workSans.className}>
         <ThemeProvider
           attribute="class"
@@ -76,5 +75,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
