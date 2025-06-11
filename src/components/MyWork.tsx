@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Bin } from "@/components/icons"
 import CardSkeleton from "@/components/CardSkeleton"
 import { motion } from "framer-motion"
+import { localProjects } from "./projects/projects"
 
 interface Repo {
   html_url: string
@@ -19,32 +20,12 @@ interface Repo {
   };
 }
 
-const fetchRepos = async (): Promise<Repo[]> => {
-  try {
-    const res = await fetch(`/api/github`)
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`)
-    }
-    const data: Repo[] = await res.json()
-    return data
-  } catch (error) {
-    console.error("Error fetching repos:", error)
-    return []
-  }
-};
-
 const MyWork: FC = () => {
   const [repos, setRepos] = useState<Repo[]>([])
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedRepos = await fetchRepos()
-      setRepos(fetchedRepos)
-      setLoading(false)
-    };
-    fetchData()
+   useEffect(() => {
+    setRepos(localProjects)
   }, [])
 
   useEffect(() => {
@@ -71,7 +52,6 @@ const MyWork: FC = () => {
   }, [])
 
   const languages = Array.from(new Set(repos.map((repo) => repo.language)))
-
   const filteredRepos = selectedLanguage
     ? repos.filter((repo) => repo.language === selectedLanguage)
     : repos
@@ -93,46 +73,56 @@ const MyWork: FC = () => {
                 Aquí encontrarás mi colección de proyectos, tanto profesionales como personales.
               </p>
             </div>
-
-            {/* Scroll horizontal para filtros */}
             <div
-              className="flex gap-x-2 overflow-x-auto whitespace-nowrap scrollbar-hide"
+              className="flex gap-x-2 overflow-x-auto whitespace-nowrap scrollbar-hide items-center"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-              {languages.map((language) => (
+              {selectedLanguage && (
                 <Button
-                  key={language}
-                  className="py-1 px-3 bg-foreground rounded transition-colors hover:bg-muted-foreground/20 hover:text-foreground"
-                  onClick={() =>
-                    setSelectedLanguage(
-                      selectedLanguage === language ? null : language
-                    )
-                  }
+                  variant="outline"
+                  className="py-1 px-3 border border-destructive text-destructive hover:bg-destructive/10 transition"
+                  onClick={() => setSelectedLanguage(null)}
                 >
-                  {language ? language : <Bin className="size-5" />}
+                  <Bin className="size-4 mr-1" />
+                  Limpiar
                 </Button>
-              ))}
+              )}
+
+              {languages.map((language) => {
+                const isActive = selectedLanguage === language
+                return (
+                  <Button
+                    key={language}
+                    className={`py-1 px-3 rounded transition-colors ${
+                      isActive
+                        ? "bg-muted-foreground text-background"
+                        : "bg-foreground hover:bg-muted-foreground"
+                    }`}
+                    onClick={() =>
+                      setSelectedLanguage(isActive ? null : language)
+                    }
+                  >
+                    {language}
+                  </Button>
+                )
+              })}
             </div>
           </div>
         </div>
 
         {/* Grid de tarjetas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 w-full max-w-7xl">
-          {loading ? (
-            Array.from({ length: 5 }).map((_, i) => <CardSkeleton key={i} />)
-          ) : (
-            filteredRepos.map((repo) => (
-              <CardRepo
-                html_url={repo.html_url}
-                key={repo.id}
-                name={repo.name}
-                description={repo.description}
-                imageUrl={repo.owner.avatar_url}
-                language={repo.language}
-                updatedAt={repo.updated_at}
-              />
-            ))
-          )}
+          {filteredRepos.map((repo) => (
+            <CardRepo
+              html_url={repo.html_url}
+              key={repo.id}
+              name={repo.name}
+              description={repo.description}
+              imageUrl={repo.owner.avatar_url}
+              language={repo.language}
+              updatedAt={repo.updated_at}
+            />
+          ))}
         </div>
       </motion.section>
     </main>
