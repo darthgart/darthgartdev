@@ -5,7 +5,7 @@ export const localProjects = [
         name: "darthgartdev",
         description:
         "Sitio web desarrollado con React, Next.js y TypeScript, enfocado en rendimiento, escalabilidad y buenas prácticas de desarrollo",
-        language: "React",
+        language: "Typescript",
         updated_at: "2025-05-01",
         owner: {
             avatar_url: "https://avatars.githubusercontent.com/u/your-user-id"
