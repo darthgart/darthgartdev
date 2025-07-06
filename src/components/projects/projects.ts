@@ -12,7 +12,7 @@ export const localProjects = [
         }
     },
     {
-        html_url: "https://darthgart.dev/curriculum",
+        html_url: "https://darthgartdev-curriculum.vercel.app/",
         id: 2,
         name: "darthgart-curriculum",
         description:
