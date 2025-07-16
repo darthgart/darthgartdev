@@ -57,7 +57,7 @@ export default function AboutMe() {
         transition={{ duration: 0.6 }}
       >
         <div className="grid lg:grid-cols-2 gap-10 p-8 md:p-16">
-          <div className="flex flex-col justify-center space-y-6">
+          <div className="flex flex-col justify-center space-y-3">
             <h2 className="text-4xl font-semibold tracking-tight text-foreground">
               Hola, soy Edgar Sanchez
             </h2>
@@ -74,6 +74,18 @@ export default function AboutMe() {
               no he parado de aprender, crear y evolucionar.
               <br /><br />
             </p>
+            <Link
+              href="https://darthgartdev-curriculum.vercel.app/"
+              className="w-full"
+            >
+              <Button
+                className="w-full text-bold bg-primary text-primary-foreground 
+                  transition-colors rounded-xl px-6 py-2
+                  hover:bg-foreground"
+              >
+                VER CURRÍCULUM
+              </Button>
+            </Link>
             <Link
               href="/work"
               className="w-full"
@@ -150,14 +162,14 @@ export default function AboutMe() {
           <h3 className="text-2xl font-semibold text-foreground mb-8">Formación</h3>
           <div className="relative border-l border-primary/30 pl-6 space-y-10">
             <div className="relative">
-              <p className="text-primary text-xs text-base">Desde 2014</p>
+              <p className="text-primary text-xs">Desde 2014</p>
               <h4 className="text-lg font-semibold text-primary">Autodidacta</h4>
               <p className="text-muted-foreground text-base">
                  Mi camino empezó explorando a fondo el funcionamiento de sistemas y dispositivos, lo que despertó mi interés por la programación y la tecnología.
               </p>
             </div>
             <div className="relative">
-              <p className="text-primary text-xs text-base">2022-2024</p>
+              <p className="text-primary text-xs">2022-2024</p>
               <h4 className="text-lg font-semibold text-primary">CFGS DAM</h4>
               <p className="text-muted-foreground text-base">
                 Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM), donde consolidé bases sólidas
@@ -165,7 +177,7 @@ export default function AboutMe() {
               </p>
             </div>
             <div className="relative">
-              <p className="text-primary text-xs text-base">Desde 2024</p>
+              <p className="text-primary text-xs">Desde 2024</p>
               <h4 className="text-lg font-semibold text-primary">CEFP IA & Big Data</h4>
               <p className="text-muted-foreground text-base">
                 Actualmente, me encuentro ampliando mis conocimientos con el curso de Especialización en Inteligencia
